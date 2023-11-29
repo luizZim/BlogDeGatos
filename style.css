@@ -1,0 +1,270 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root{
+  font-size: 62.5%;
+  --hue:300;
+  --hue-svg:475deg;
+  --color-base-blue-700: hsl(var(--hue), 91%, 25%);
+  --color-base-blue-500: hsl(var(--hue), 46%, 40%);
+  --color-base-black-title: #202024;
+  --color-base-black-text: #121214;
+  --color-base-white: #FFFFFF;
+}
+body{
+  font-size: 1.6rem;
+}
+
+html, body, input{
+  font-family: 'Mulish', sans-serif;
+}
+
+/* Header */
+
+header{
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 1.2rem 2.8rem;
+  background:var(--color-base-blue-700);
+}
+.logo{
+  filter: saturate(100%) brightness(1) hue-rotate(var(--hue-svg));
+}
+header form{
+  flex: 1;
+}
+
+.avatar{
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.input-wrapper label{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+}
+.input-wrapper input{
+  width: 100%;
+  padding: 1.2rem 1.4rem;
+  border-radius: .4rem;
+  border: none; 
+  background-color: rgba(255, 255, 255, 0.20);
+  font-weight: 600;
+  color: var(--color-base-white);
+  font-size: 1.6rem;
+}
+
+.input-wrapper input::placeholder{
+  color: var(--color-base-white);
+}
+
+
+/* Main */
+
+#app{
+  display: grid;
+  height: 100vh;
+  grid-area: 
+  "header header"
+  "main  main"
+  "aside aside"
+  "footer footer";
+  grid-template-rows: max-content 1fr max-content;
+}
+
+.banner{
+  width: 43.4rem;
+  height: 21.9rem;
+  object-fit: cover;
+  display: block;
+}
+.banner:hover{
+  filter: contrast(101%) saturate(200%);
+}
+.container{
+  padding: 3.2rem 2.4rem ;
+}
+.container p{
+  margin-top: 3rem;
+  color: var(--color-base-black-text);
+  line-height: 160%;
+  font-weight: 400;
+  text-align: left;
+}
+.title-feedback h1{
+  margin-bottom: .8rem;
+  color: var(--color-base-black-title);
+  font-weight: 700;
+  font-size: 2.4rem;
+}
+.title-feedback img{
+  object-fit: cover;
+  cursor: pointer;
+}
+.title-feedback img:hover{
+  transform: scale(1.1);
+  filter: hue-rotate(var(--hue-svg)) contrast(101%) saturate(200%);
+}
+.svg-color{
+  filter: saturate(120%) brightness(1) hue-rotate(var(--hue-svg));
+}
+
+.title-feedback img:nth-child(2){
+  margin-right: .8rem;
+}
+
+
+/* Artigos */
+
+.sidebar{
+  padding: 0 2.4rem ;
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar h1{
+  font-size: 2.4rem;
+  font-weight: 700;
+  grid-area: aside;
+}
+
+.item img{
+  width: 15.0rem;
+  height: 8.5rem;
+  object-fit: cover;
+  border-radius: .5rem;
+}
+
+.item{
+  display: grid;
+  grid-template-areas: 
+  "image title"
+  "image description";
+  gap: 1.6rem;
+}
+
+.item > figcaption img{
+  grid-area: image;
+  max-height: 100%;
+}
+.item > figcaption h2{
+  grid-area: title;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--color-base-black-title);
+}
+
+.item > figcaption p{
+  width: 21.5rem;
+  grid-area: description;
+  font-size: 1.4rem;
+  color: var(--color-base-black-text);
+}
+.item:last-child{
+  row-gap: 4rem;
+}
+
+.item:hover{
+  transform: scale(1.1) ;
+  filter: hue-rotate(5deg) contrast(101%) saturate(200%);
+}
+.item img:hover{
+  transform: rotate( -3deg);
+}
+
+footer{
+  color: var(--color-base-white);
+  background: var(--color-base-blue-500);
+  text-align: center;
+  padding: 1.6rem;
+  font-weight: 600;
+}
+header{
+  --startY: -100%;
+  animation: move 1s;
+}
+main .banner{
+  --startY: -50% ;
+  animation: move .8s ease-in-out;
+}
+figure{
+  --startX: 100%;
+  --delay: .8s;
+  animation: slide var(--delay) ease-in;
+}
+footer{
+  --startY:100%;
+  animation: move 1s;
+}
+
+@keyframes move{
+  0%{
+    transform: translateY(var(--startY));
+  }
+}
+
+@keyframes slide{
+  0%{
+    transform: translateX(var(--startX));
+  }
+}
+
+@media (min-width: 1000px){
+  #app{
+    grid-template: 
+    "header header"
+    "main aside"
+    "footer footer";
+  }
+  header{
+    grid-area: header;
+    padding: 1.2rem 11.2rem;
+  }
+  main{
+    grid-area: main;
+    width: 60rem;
+    justify-self: end;
+  }
+
+  main .banner{
+    width: 100%;
+    height: 30rem;
+    border-radius: 0.5rem;
+    margin-bottom: 4rem;
+  }
+  
+  aside{
+    grid-area: aside;
+    margin-top: 4.4rem;
+    justify-self: start;
+  }
+  .sidebar{
+    padding: 0 2.4rem 0 0;
+  }
+  
+  footer{
+    grid-area: footer;
+  }
+}
+
+@media (min-width: 1440px){
+  main{
+    width: 80rem;
+  }
+  .container{
+    padding: 3.2rem 2rem 0 0;
+  }
+
+  
+  .title-feedback{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
